@@ -1,0 +1,57 @@
+{% load static %}
+<html>
+  <head>
+    <title>BEEP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'beep_main/bootstrap/css/bootstrap.min.css' %}" />
+
+    <header class="bd-header bg-dark py-3 d-flex align-items-stretch border-bottom border-dark" style="position: fixed; top: 0%; width: 100%; z-index: 100;">
+      <div class="container-fluid d-flex align-items-center">
+        <h1 class="d-flex align-items-center fs-4 text-white mb-0">
+          BEEP - anonymous chat
+        </h1>
+        <span style="cursor: pointer;" onclick="alert('This is a super simple anonymous chat platform created by divine')" class="ms-auto link-light">About</span>
+      </div>
+    </header>
+    <div style="padding-bottom: 90px;"></div>
+  </head>
+
+
+  <body style="background-color: silver;" class="d-flex flex-column h-100">
+   
+    <main class="flex-shrink-0">
+      <div class="container">
+        {% for msg in messages %}
+
+        <div class="card">
+          <div class="card-body">
+            <p class="card-text">{{ msg.message }}</p>
+          </div>
+          <div class="card-footer text-muted">
+            {{ msg.created_at }}
+          </div>
+        </div>
+        <br>
+        {% endfor %}
+      </div>
+    </main>
+    
+    <div style="padding-top: 125px;"></div>
+    <div class="mt-auto py-3 bg-dark" style="position: fixed; bottom: 0%; width: 100%;">
+      <div class="container">
+        <form method="post">
+          {% csrf_token %}
+          <div class="input-group">
+          <textarea type="text" class="form-control" maxlength="2500" aria-label="With textarea" placeholder="type your message" required="required" name="m"></textarea>
+          <button class="btn btn-success" type="submit">Send</button>
+          </div>
+          
+        </form>
+      </div>
+    </div>
+    
+    
+    <script src="{% static 'beep_main/bootstrap/js/bootstrap.min.js' %}" ></script>
+ 
+    </body>
+</html>
